@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Haider Shabir" />
+    <title>Jeu de Dé</title>
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- header - start -->
+    <header class="container">
+      <div class="header__logo">
+        <img src="/assets/diceLogo.png" alt="logo" />
+      </div>
+      <h1 class="header__title">DICE GAME</h1>
+
+      <div class="header__btn">
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="rule__btn"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          <i class="bi bi-info-circle"></i>
+          Règles du jeu
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                  <i class="bi bi-info-circle"></i>Règles du jeu
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <p>- Le jeu comprend 2 joueurs sur un seul et même écran.</p>
+                <p>
+                  - Chaque joueur possède un score temporaire (ROUND) et un
+                  score global (GLOBAL).
+                </p>
+                <p>
+                  - À chaque tour, le joueur a son ROUND initialisé à 0 et peut
+                  lancer un dé autant de fois qu'il le souhaite.
+                </p>
+                <p>
+                  Le résultat d’un lancer est ajouté au ROUND. Lors de son tour,
+                  le joueur peut décider à tout moment de: - Cliquer sur
+                  l’option “Hold”, qui permet d’envoyer les points du ROUND vers
+                  le GLOBAL, ce sera alors le tour de l’autre joueur. Si les
+                  points du round sont à zéro également.
+                </p>
+                <p>
+                  - Lancer le dé. S’il obtient un 1, son score ROUND est perdu
+                  et c’est la fin de son tour. Le premier joueur qui atteint les
+                  100 points sur global gagne le jeu !
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Fermer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button id="newGameBtn" class="newGame__btn" type="button">
+          <i class="bi bi-plus-circle"></i>
+          Nouvelle partie
+        </button>
+        <!-- <button id="editBtn"  type="button">
+          Editer pseudos
+        </button>
+         -->
+
+        <button
+          type="button"
+          class="edit__btn"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          <i class="bi bi-pencil-square"></i>
+          Editer pseudos
+        </button>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <i class="bi bi-pencil-square"></i>Editer le nom des joueurs
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-1">
+                    <label for="recipient-name" class="col-form-label"
+                      >Joueur 1</label
+                    >
+                    <input type="text" class="form-control" id="inputName0" />
+                  </div>
+                  <div class="mb-1">
+                    <label for="recipient-name" class="col-form-label"
+                      >Joueur 2</label
+                    >
+                    <input type="text" class="form-control" id="inputName1" />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  id="editBtn"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Valider
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- header - end -->
+
+    <main>
+      <div class="container">
+        <div class="row game__menu">
+          <div class="col-md-4 col-sm-3 player-0-panel">
+            <div class="player__title player-0" id="name-0">JOUEUR 1</div>
+            <div class="player__score" id="score-0">0</div>
+            <div class="player__currentBox">
+              <div class="current__title">ROUND</div>
+              <div class="current__score" id="current-0">0</div>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-3">
+            <img class="dice" src="/assets/dice-1.png" alt="Dice" />
+            <div class="game__btn">
+              <div>
+                <button id="rollBtn" class="roll__btn">
+                  <i class="bi bi-arrow-repeat"></i>
+                  Lancer le dé
+                </button>
+              </div>
+
+              <button id="holdBtn" class="hold__btn">
+                <i class="bi bi-box-arrow-in-down"></i>
+                HOLD
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-3 player-1-panel">
+            <div class="player__title player-1" id="name-1">JOUEUR 2</div>
+            <div class="player__score" id="score-1">0</div>
+            <div class="player__currentBox">
+              <div class="current__title">ROUND</div>
+              <div class="current__score" id="current-1">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="footer">
+      <p class="footer__text">
+        &copy; Shabir Haider, pour l'évaluation javascript Studi
+      </p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
