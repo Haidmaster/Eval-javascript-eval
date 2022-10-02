@@ -13,8 +13,8 @@
 
 //--------------- création variables pour le jeu
 
-let scores, roundScore, activePlayer, gamePlaying;
-init();
+let scores, roundScore, playTurn, gamePlaying;
+reset();
 // création d'une fonction pour génerer un numéro random entre 1 et 6
 
 const rollDice = function () {
@@ -30,9 +30,8 @@ const rollDice = function () {
     if (dice !== 1) {
       // Ajouter score du dé dans le round du joueur actif
       roundScore += dice;
-      document.getElementById("current-" + activePlayer).textContent =
-        roundScore;
-      document.querySelector(".player-" + activePlayer).classList.add("active");
+      document.getElementById("current-" + playTurn).textContent = roundScore;
+      document.querySelector(".player-" + playTurn).classList.add("active");
     } else {
       // Fonction joueur suivant si la condition n'est pas respecté
       playSoundWrong();
@@ -49,11 +48,10 @@ const hold = function () {
   playSoundHold();
   if (gamePlaying) {
     // Ajouter current au score global du joueur actif
-    scores[activePlayer] += roundScore;
+    scores[playTurn] += roundScore;
 
     // Ajout contenu dans le dom
-    document.querySelector("#score-" + activePlayer).textContent =
-      scores[activePlayer];
+    document.querySelector("#score-" + playTurn).textContent = scores[playTurn];
 
     //Condition pour désactiver hold si round est à 0
     currentScore = roundScore;
@@ -61,19 +59,19 @@ const hold = function () {
       nextPlayer(false);
     }
     // Condition si le joueur à atteint un score de 100
-    if (scores[activePlayer] >= 100) {
+    if (scores[playTurn] >= 100) {
       gamePlaying = false;
       playSoundWin();
 
       document.getElementById("current-0").textContent = 0;
       document.getElementById("current-1").textContent = 0;
-      document.querySelector("#name-" + activePlayer).textContent = "Gagné !";
+      document.querySelector("#name-" + playTurn).textContent = "Gagné !";
       document.querySelector(".dice").style.display = "none";
       document
-        .querySelector(".player-" + activePlayer + "-panel")
+        .querySelector(".player-" + playTurn + "-panel")
         .classList.add("Gagné !");
       document
-        .querySelector(".player-" + activePlayer + "-panel")
+        .querySelector(".player-" + playTurn + "-panel")
         .classList.remove("active");
     } else {
       // Passer au joueur suivant
@@ -89,7 +87,7 @@ holdBtn.addEventListener("click", hold);
 function nextPlayer() {
   roundScore = 0;
   //Si le joueur en jeu
-  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+  playTurn === 0 ? (playTurn = 1) : (playTurn = 0);
 
   //
   document.getElementById("current-0").textContent = 0;
@@ -99,15 +97,13 @@ function nextPlayer() {
   document.querySelector(".dice").style.display = "block";
 }
 
-function init() {
+function reset() {
   // playSoundRestart();
   // Reinitialiser les variables
   scores = [0, 0];
   roundScore = 0;
-  activePlayer = 0;
+  playTurn = 0;
   gamePlaying = true;
-
-  //Supprimer
 
   // Reintialiser les scores
   document.getElementById("score-0").textContent = "0";
@@ -129,7 +125,7 @@ function init() {
 }
 // bouton nouvelle partie
 let newGame = document.getElementById("newGameBtn");
-newGame.addEventListener("click", init);
+newGame.addEventListener("click", reset);
 
 // Fonction pour editer pseudos
 const edit = function () {
