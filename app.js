@@ -58,7 +58,6 @@ const hold = function () {
     //Condition pour désactiver hold si round est à 0
     currentScore = roundScore;
     if (currentScore == 0) {
-      !playSoundHold();
       nextPlayer(false);
     }
     // Condition si le joueur à atteint un score de 100
@@ -115,6 +114,9 @@ function init() {
   // Reintialiser nom des joueurs
   document.getElementById("name-0").textContent = "Joueur 1";
   document.getElementById("name-1").textContent = "Joueur 2";
+  document.getElementById("inputName0").value = "";
+  document.getElementById("inputName1").value = "";
+
   // Supprimer les messages
   document.querySelector(".player-0-panel").classList.remove("Gagné");
   document.querySelector(".player-1-panel").classList.remove("Gagné");
