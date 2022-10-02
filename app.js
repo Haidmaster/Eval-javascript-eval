@@ -64,6 +64,7 @@ const hold = function () {
     if (scores[activePlayer] >= 100) {
       gamePlaying = false;
       playSoundWin();
+
       document.getElementById("current-0").textContent = 0;
       document.getElementById("current-1").textContent = 0;
       document.querySelector("#name-" + activePlayer).textContent = "Gagné !";
@@ -105,6 +106,8 @@ function init() {
   roundScore = 0;
   activePlayer = 0;
   gamePlaying = true;
+
+  //Supprimer
 
   // Reintialiser les scores
   document.getElementById("score-0").textContent = "0";
@@ -154,12 +157,15 @@ const wrongSound = new Audio("/assets/wrongNumberSound.mp3");
 const winSound = new Audio("/assets/winSound.mp3");
 const moneySound = new Audio("/assets/moneySound.mp3");
 
+//Sons dé
 function playSoundDe() {
   diceSound.play();
 }
+
 function playSoundWrong() {
   wrongSound.play();
 }
+
 function playSoundHold() {
   moneySound.play();
 }
