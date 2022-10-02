@@ -10,7 +10,7 @@ background-color:rgba(70, 1, 1, 0);
 font-family: 'Lato', sans-serif;
 }
 :root {
-  --color-red: #eb4d4d;
+  --color-red:#ff3232;
   --color-gray: #555; 
 }
 
@@ -81,15 +81,17 @@ MAIN
 .game__menu {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  text-align: center; 
- padding: 2%;
+  align-items:center;
+  text-align: center;
+  padding: 2%; 
+ 
 }
 .player-0-panel,.player-1-panel {
   background-color:rgba(41, 32, 32, 0.123); 
   box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
   border-radius: 20px; 
-  padding: 1%;  
+  padding: 1%;
+  min-width: 14rem;  
 }
 
 .player__title {
