@@ -150,8 +150,8 @@ editName.addEventListener("click", edit);
 
 const diceSound = new Audio("/assets/diceSound.mp3");
 const wrongSound = new Audio("/assets/wrongNumberSound.mp3");
-const winSound = new Audio("/assets/winSound.mp3");
-const moneySound = new Audio("/assets/moneySound.mp3");
+const victorySound = new Audio("/assets/victorySound.mp3");
+const holdSound = new Audio("/assets/holdSound.mp3");
 
 //Sons dé
 function playSoundDe() {
@@ -163,9 +163,9 @@ function playSoundWrong() {
 }
 
 function playSoundHold() {
-  moneySound.play();
+  holdSound.play();
 }
 
 function playSoundWin() {
-  winSound.play();
+  victorySound.play();
 }
