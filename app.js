@@ -14,7 +14,7 @@
 //--------------- création variables pour le jeu
 
 let scores, roundScore;
-let playTurn = [];
+let playTurn = [0, 1];
 let gamePlaying = true;
 
 reset();
@@ -105,6 +105,7 @@ function reset() {
   scores = [0, 0];
   roundScore = 0;
   playTurn = 0;
+  gamePlaying = true;
 
   // Reintialiser les scores
   document.getElementById("score-0").textContent = "0";
