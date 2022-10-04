@@ -13,7 +13,10 @@
 
 //--------------- création variables pour le jeu
 
-let scores, roundScore, playTurn, gamePlaying;
+let scores, roundScore;
+let playTurn = [];
+let gamePlaying = true;
+
 reset();
 // création d'une fonction pour génerer un numéro random entre 1 et 6
 
@@ -22,9 +25,9 @@ const rollDice = function () {
   if (gamePlaying) {
     let dice = Math.floor(Math.random() * 6) + 1;
 
-    let diceDom = document.querySelector(".dice");
-    diceDom.style.display = "block";
-    diceDom.src = "./assets/dice-" + dice + ".png";
+    let diceGame = document.querySelector(".dice");
+    diceGame.style.display = "block";
+    diceGame.src = "./assets/dice-" + dice + ".png";
 
     // Si le score du dé est strictement différent de 1
     if (dice !== 1) {
@@ -45,7 +48,6 @@ rollBtn.addEventListener("click", rollDice);
 
 //--------------- Fonction pour récuperer le current
 const hold = function () {
-  playSoundHold();
   if (gamePlaying) {
     // Ajouter current au score global du joueur actif
     scores[playTurn] += roundScore;
@@ -82,6 +84,7 @@ const hold = function () {
 
 let holdBtn = document.getElementById("holdBtn");
 holdBtn.addEventListener("click", hold);
+holdBtn.addEventListener("click", playSoundHold);
 
 // Fonction pour gerer 2 joueurs
 function nextPlayer() {
@@ -98,12 +101,10 @@ function nextPlayer() {
 }
 
 function reset() {
-  // playSoundRestart();
   // Reinitialiser les variables
   scores = [0, 0];
   roundScore = 0;
   playTurn = 0;
-  gamePlaying = true;
 
   // Reintialiser les scores
   document.getElementById("score-0").textContent = "0";
@@ -126,6 +127,7 @@ function reset() {
 // bouton nouvelle partie
 let newGame = document.getElementById("newGameBtn");
 newGame.addEventListener("click", reset);
+newGame.addEventListener("click", playSoundRestart);
 
 // Fonction pour editer pseudos
 const edit = function () {
@@ -152,6 +154,7 @@ const diceSound = new Audio("/assets/diceSound.mp3");
 const wrongSound = new Audio("/assets/wrongNumberSound.mp3");
 const victorySound = new Audio("/assets/victorySound.mp3");
 const holdSound = new Audio("/assets/holdSound.mp3");
+const restartSound = new Audio("/assets/restartSound.mp3");
 
 //Sons dé
 function playSoundDe() {
@@ -168,4 +171,7 @@ function playSoundHold() {
 
 function playSoundWin() {
   victorySound.play();
+}
+function playSoundRestart() {
+  restartSound.play();
 }
