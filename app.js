@@ -34,7 +34,6 @@ const rollDice = function () {
       // Ajouter score du dé dans le round du joueur actif
       roundScore += dice;
       document.getElementById("current-" + playTurn).textContent = roundScore;
-      document.querySelector(".player-" + playTurn).classList.add("active");
     } else {
       // Fonction joueur suivant si la condition n'est pas respecté
       playSoundWrong();
@@ -48,6 +47,7 @@ rollBtn.addEventListener("click", rollDice);
 
 //--------------- Fonction pour récuperer le current
 const hold = function () {
+  playSoundHold();
   if (gamePlaying) {
     // Ajouter current au score global du joueur actif
     scores[playTurn] += roundScore;
@@ -84,9 +84,9 @@ const hold = function () {
 
 let holdBtn = document.getElementById("holdBtn");
 holdBtn.addEventListener("click", hold);
-holdBtn.addEventListener("click", playSoundHold);
 
 // Fonction pour gerer 2 joueurs
+
 function nextPlayer() {
   roundScore = 0;
   //Si le joueur en jeu
